@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans Thai", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* สีหลักของแต่ละโปรเจกต์ — ค่าจริงถูกตั้งผ่าน style (ดู src/projects/themes.ts) */
+@theme inline {
+  --color-brand-50: var(--brand-50, #eef2ff);
+  --color-brand-100: var(--brand-100, #e0e7ff);
+  --color-brand-500: var(--brand-500, #6366f1);
+  --color-brand-600: var(--brand-600, #4f46e5);
+  --color-brand-700: var(--brand-700, #4338ca);
+}
+
+body {
+  @apply bg-slate-50 text-slate-800 antialiased;
+}
