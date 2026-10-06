@@ -1,7 +1,7 @@
 import { useMemo, useState, type FormEvent } from 'react'
 import { Trash2, X } from 'lucide-react'
 import { cell, FilterBar, PageHeading, RowActions, StatusPill, TableCard, type StatusFilter } from './TableParts'
-import { dataSources, type DataSource } from './mock'
+import { dataSources, type DataSource } from '../mock'
 
 export default function DataSources() {
   const [sources, setSources] = useState(dataSources)

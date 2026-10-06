@@ -1,6 +1,6 @@
 // ข้อมูลจำลองสำหรับ mockup — ใช้ข้อมูลชุดเดียวกับ apistm2 และเพิ่มคอลัมน์สำหรับตาราง
 // Group API และ Dynamic API ใช้ชุดเดียวกับ apistm2
-import { dataSources as baseSources, dynamicApis, generateToken, groupApis, processTracking, upcomingOperations, type Status } from '../apistm2/mock'
+import { dataSources as baseSources, dynamicApis, generateToken, groupApis, processTracking, upcomingOperations, type Status } from '../mock'
 
 export type { Status }
 export { dynamicApis, generateToken, groupApis, processTracking, upcomingOperations }

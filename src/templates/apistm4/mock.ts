@@ -1,5 +1,5 @@
 // ข้อมูลจำลองสำหรับ mockup — Data Source, Group API, Dynamic API ใช้ชุดเดียวกับ apistm2
-import { dataSources, dynamicApis, generateToken, groupApis, type DataSource, type Status } from '../apistm2/mock'
+import { dataSources, dynamicApis, generateToken, groupApis, type DataSource, type Status } from '../mock'
 
 export type { DataSource, Status }
 export { dataSources, dynamicApis, generateToken, groupApis }

@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { Check, Copy, Eye, History, Pencil, Plus, Search, Trash2 } from 'lucide-react'
-import type { Status } from './mock'
+import type { Status } from '../mock'
 
 export type StatusFilter = Status | 'all'
 
