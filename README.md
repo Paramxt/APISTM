@@ -43,6 +43,7 @@ src/
 │   ├── TemplatePreview.tsx    # ภาพตัวอย่างเทมเพลต
 │   └── themes.ts              # รายชื่อเทมเพลตและชุดสี
 ├── templates/                 # หน้าและ layout ของแต่ละเทมเพลต
+│   ├── apistm/
 │   ├── admin/
 │   ├── kanban/
 │   └── store/
