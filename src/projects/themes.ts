@@ -9,10 +9,10 @@ export const templates: Record<TemplateId, { name: string; description: string }
   admin: { name: 'ระบบหลังบ้าน', description: 'เมนูด้านข้าง แดชบอร์ด ตาราง และฟอร์ม' },
   kanban: { name: 'บอร์ดจัดการงาน', description: 'บอร์ดแบบ Kanban ลากการ์ดย้ายสถานะได้' },
   store: { name: 'หน้าร้านออนไลน์', description: 'แสดงสินค้าเป็นกริด พร้อมตะกร้าสินค้า' },
-  apistm: { name: 'ระบบ API', description: 'หน้าต่างสำหรับจัดการ API endpoints' },
-  apistm2: { name: 'ระบบ API (แดชบอร์ด)', description: 'แถบเมนูด้านบน แดชบอร์ดสรุปผล และ Data Sources' },
-  apistm3: { name: 'ระบบ API (ตารางข้อมูล)', description: 'เมนูด้านข้างสีอ่อน ตารางเต็มจอ เลือกหลายรายการได้' },
-  apistm4: { name: 'ระบบ API (กราฟวิเคราะห์)', description: 'เมนูด้านข้างหุบได้ แดชบอร์ดกราฟหลายแบบ และตารางข้อมูล' },
+  apistm: { name: 'UI APISTM 1', description: 'Mock UI and Data APISTM 1' },
+  apistm2: { name: 'UI APISTM 2', description: 'Mock UI and Data APISTM 2' },
+  apistm3: { name: 'UI APISTM 3', description: 'Mock UI and Data APISTM 3' },
+  apistm4: { name: 'UI APISTM 4', description: 'Mock UI and Data APISTM 4' },
 }
 
 // ค่าสีจากชุดสีของ Tailwind (50 / 100 / 500 / 600 / 700)
