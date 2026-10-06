@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { ArrowLeft, Database, Trash2 } from 'lucide-react'
 import { useMatch, useNavigate } from 'react-router-dom'
 import { cell, CopyButton, FilterBar, PageHeading, RowActions, StatusPill, TableCard, selectClass, type StatusFilter } from './TableParts'
-import { dataSources, dynamicApis, groupApis } from './mock'
+import { dataSources, dynamicApis, groupApis } from '../mock'
 import DynamicApiEditor, { type DynamicApiDraft } from '../DynamicApiEditor'
 import { useProjectBase } from '../../projects/useProjectBase'
 

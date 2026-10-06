@@ -3,22 +3,28 @@ import { Plus, Trash2, X } from 'lucide-react'
 import { RowActions, SearchInput, StatusDot, StatusSelect, TableCard, addButton, cell, type StatusFilter } from './TableParts'
 import { dataSources, type DataSource } from './mock'
 
+type CredentialDataSource = DataSource
+const encryptedPasswordLabel = 'DatabasePassword'
+
 export default function DataSources() {
-  const [sources, setSources] = useState(dataSources)
+  // apistm4 uses the shared mock shape, where the credential field is named `Username`.
+  const [sources, setSources] = useState<CredentialDataSource[]>(() =>
+    dataSources.map((source) => ({ ...source, databaseType: 'SQL Server' })),
+  )
   const [query, setQuery] = useState('')
   const [status, setStatus] = useState<StatusFilter>('all')
-  const [editing, setEditing] = useState<DataSource | null | undefined>(undefined)
+  const [editing, setEditing] = useState<CredentialDataSource | null | undefined>(undefined)
   const [pendingDelete, setPendingDelete] = useState<DataSource | null>(null)
 
   const rows = useMemo(
     () =>
       sources.filter(
-        (s) => (status === 'all' || s.status === status) && `${s.name} ${s.databaseType} ${s.host} ${s.databaseName}`.toLowerCase().includes(query.toLowerCase()),
+        (s) => (status === 'all' || s.status === status) && `${s.name} ${s.databaseType} ${s.host} ${s.databaseName} ${s.Username}`.toLowerCase().includes(query.toLowerCase()),
       ),
     [sources, query, status],
   )
 
-  function saveSource(source: Omit<DataSource, 'id'>) {
+  function saveSource(source: Omit<CredentialDataSource, 'id'>) {
     if (editing === null) {
       const id = Math.max(0, ...sources.map((item) => item.id)) + 1
       setSources((current) => [...current, { ...source, id }])
@@ -47,7 +53,7 @@ export default function DataSources() {
             </button>
           </>
         }
-        headers={['Name', 'DB Type', 'Host', 'Port', 'Database Name', 'Status', 'Action']}
+        headers={['Name', 'DB Type', 'Host', 'Port', 'Database Name', 'Username', 'Status', 'Action']}
         minWidth="min-w-[820px]"
         shown={rows.length}
         total={sources.length}
@@ -59,6 +65,7 @@ export default function DataSources() {
             <td className={`${cell} text-slate-600`}>{s.host}</td>
             <td className={`${cell} text-slate-600`}>{s.port}</td>
             <td className={`${cell} font-mono text-xs text-slate-600`}>{s.databaseName}</td>
+            <td className={`${cell} text-slate-600`}>{s.Username}</td>
             <td className={cell}>
               <StatusDot status={s.status} />
             </td>
@@ -74,23 +81,33 @@ export default function DataSources() {
   )
 }
 
-function DataSourceModal({ source, onClose, onSave }: { source: DataSource | null; onClose: () => void; onSave: (source: Omit<DataSource, 'id'>) => void }) {
-  const [draft, setDraft] = useState<Omit<DataSource, 'id'>>(
+function DataSourceModal({ source, onClose, onSave }: { source: CredentialDataSource | null; onClose: () => void; onSave: (source: Omit<CredentialDataSource, 'id'>) => void }) {
+  const [draft, setDraft] = useState<Omit<CredentialDataSource, 'id'>>(
     source
-      ? { name: source.name, databaseType: source.databaseType, host: source.host, port: source.port, databaseName: source.databaseName, status: source.status }
-      : { name: '', databaseType: 'SQL Server', host: '', port: '1433', databaseName: '', status: 'active' },
+      ? { name: source.name, databaseType: 'SQL Server', host: source.host, port: source.port, databaseName: source.databaseName, Username: source.Username, Password: encryptedPasswordLabel, status: source.status }
+      : { name: '', databaseType: 'SQL Server', host: '', port: '', databaseName: '', Username: '', Password: '', status: 'active' },
   )
-  const fields: { key: 'name' | 'databaseType' | 'host' | 'port' | 'databaseName'; label: string }[] = [
+  const fields: { key: 'name' | 'databaseType' | 'host' | 'port' | 'databaseName' | 'Username' | 'Password'; label: string }[] = [
     { key: 'name', label: 'Name' },
     { key: 'databaseType', label: 'DB Type' },
     { key: 'host', label: 'Host' },
     { key: 'port', label: 'Port' },
     { key: 'databaseName', label: 'Database Name' },
+    { key: 'Username', label: 'Username' },
+    { key: 'Password', label: 'Password' },
   ]
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    onSave({ ...draft, name: draft.name.trim(), host: draft.host.trim(), databaseName: draft.databaseName.trim() })
+    onSave({
+      ...draft,
+      name: draft.name.trim(),
+      host: draft.host.trim(),
+      databaseName: draft.databaseName.trim(),
+      Username: draft.Username.trim(),
+      // The edit form only shows a marker for the encrypted value; keep the stored password as-is.
+      Password: source && draft.Password === encryptedPasswordLabel ? source.Password : draft.Password,
+    })
   }
 
   return (
@@ -104,9 +121,18 @@ function DataSourceModal({ source, onClose, onSave }: { source: DataSource | nul
           {fields.map(({ key, label }) => (
             <label key={key} className="text-sm font-medium text-slate-700">
               {label} *
-              <input required value={draft[key]} onChange={(event) => setDraft((current) => ({ ...current, [key]: event.target.value }))} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 font-normal outline-none focus:border-brand-500" />
+            <input required disabled={key === 'databaseType'} value={key === 'databaseType' ? 'SQL Server' : draft[key]} onChange={(event) => setDraft((current) => ({ ...current, [key]: event.target.value }))} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 font-normal outline-none focus:border-brand-500 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500" />
             </label>
           ))}
+          {/* <label className="text-sm font-medium text-slate-700">
+            User
+            <input required value={draft.Username} onChange={(event) => setDraft((current) => ({ ...current, Username: event.target.value }))} autoComplete="username" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 font-normal outline-none focus:border-brand-500" />
+          </label>
+          <label className="text-sm font-medium text-slate-700">
+            Password *
+            <input required type="text" value={draft.Password} onChange={(event) => setDraft((current) => ({ ...current, Password: event.target.value }))} autoComplete="new-password" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 font-normal outline-none focus:border-brand-500" />
+            {source && <span className="mt-1 block text-xs font-normal text-slate-500">DatabasePassword indicates the saved password is encrypted.</span>}
+          </label> */}
           <label className="text-sm font-medium text-slate-700">
             Status
             <select value={draft.status} onChange={(event) => setDraft((current) => ({ ...current, status: event.target.value as DataSource['status'] }))} className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 font-normal outline-none focus:border-brand-500">

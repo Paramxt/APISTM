@@ -1,6 +1,6 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { ArrowLeft, Check, Copy, Download, Plus, Trash2, X } from 'lucide-react'
-import { dataSources, dynamicApis, groupApis, type ConditionLogic, type DynamicApiCondition, type DynamicApiConditionGroup } from './apistm2/mock'
+import { dataSources, dynamicApis, groupApis, type ConditionLogic, type DynamicApiCondition, type DynamicApiConditionGroup } from './mock'
 import { getFieldsForView, getViewsForDataSource, type ViewField } from './dynamicApiCatalog'
 
 type DynamicApiRecord = (typeof dynamicApis)[number]

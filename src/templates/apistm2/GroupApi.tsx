@@ -1,7 +1,7 @@
 import { useMemo, useState, type FormEvent } from 'react'
 import { RefreshCw, Trash2, X } from 'lucide-react'
 import { cell, CopyButton, FilterBar, PageHeading, RowActions, StatusPill, TableCard, type StatusFilter } from './TableParts'
-import { generateToken, groupApis } from './mock'
+import { generateToken, groupApis } from '../mock'
 
 export default function GroupApi() {
   const [groups, setGroups] = useState(groupApis)

@@ -10,14 +10,16 @@ export interface DataSource {
   port: string
   databaseName: string
   status: Status
+  Username: string
+  Password: string
 }
 
 export const dataSources: DataSource[] = [
-  { id: 1, name: 'Annual Plan', databaseType: 'SQL Server', host: '0.0.0.0', port: '1433', databaseName: 'STM_AnnualPlan', status: 'active' },
-  { id: 2, name: 'ERS', databaseType: 'SQL Server', host: '127.0.0.0', port: '1434', databaseName: 'STM_ERS', status: 'active' },
-  { id: 3, name: 'POCS', databaseType: 'PostgreSQL', host: '127.0.0.1', port: '5432', databaseName: 'stm_pocs', status: 'active' },
-  { id: 4, name: 'Legacy CRM', databaseType: 'MySQL', host: '10.0.0.12', port: '3306', databaseName: 'legacy_crm', status: 'inactive' },
-  { id: 5, name: 'Reporting Hub', databaseType: 'Oracle', host: '10.0.0.30', port: '1521', databaseName: 'RPT_HUB', status: 'active' },
+  { id: 1, name: 'Annual Plan', databaseType: 'SQL Server', host: '0.0.0.0', port: '1433', databaseName: 'STM_AnnualPlan', status: 'active', Username: 'sa', Password: 'password123' },
+  { id: 2, name: 'ERS', databaseType: 'SQL Server', host: '127.0.0.0', port: '1434', databaseName: 'STM_ERS', status: 'active', Username: 'sa', Password: 'password123' },
+  { id: 3, name: 'POCS', databaseType: 'PostgreSQL', host: '127.0.0.1', port: '5432', databaseName: 'stm_pocs', status: 'active', Username: 'sa', Password: 'password123' },
+  { id: 4, name: 'Legacy CRM', databaseType: 'MySQL', host: '10.0.0.12', port: '3306', databaseName: 'legacy_crm', status: 'inactive', Username: 'sa', Password: 'password123' },
+  { id: 5, name: 'Reporting Hub', databaseType: 'Oracle', host: '10.0.0.30', port: '1521', databaseName: 'RPT_HUB', status: 'active', Username: 'sa', Password: 'password123' },
 ]
 
 // สร้าง token แบบสุ่ม (ระบบสร้างให้อัตโนมัติ)

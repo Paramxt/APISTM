@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { ArrowLeft, Download, Plus, Trash2, X } from 'lucide-react'
 import { dataSources, dynamicApis, groupApis } from './mock'
-import type { ConditionLogic, DynamicApiCondition } from '../apistm2/mock'
+import type { ConditionLogic, DynamicApiCondition } from '../mock'
 import type { DynamicApiDraft } from '../DynamicApiEditor'
 import { getFieldsForView, getViewsForDataSource, type ViewField } from '../dynamicApiCatalog'
 import PageTop from './PageTop'

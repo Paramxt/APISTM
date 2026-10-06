@@ -1,5 +1,5 @@
 import { CreditCard, Rocket, Clock, BarChart3, SlidersHorizontal, LayoutGrid, CalendarDays } from 'lucide-react'
-import { stats, radarAxes, radarSeries, processTracking, calendarDays, upcomingOperations } from './mock'
+import { stats, radarAxes, radarSeries, processTracking, calendarDays, upcomingOperations } from '../mock'
 
 const cardIcons = [CreditCard, Rocket, Clock, BarChart3]
 const cardTints = ['bg-emerald-100 text-emerald-700', 'bg-orange-100 text-orange-700', 'bg-zinc-200 text-zinc-700', 'bg-violet-100 text-violet-700']
